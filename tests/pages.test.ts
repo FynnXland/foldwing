@@ -261,7 +261,7 @@ test('sharePage über den Relay: nur Relay-Pfade, Schriften unter /<T>/_font, Re
   has(html, '<a class="foot__link" href="/_/datenschutz">Datenschutz</a>')
   has(html, `<a class="foot__link" href="/_/melden?l=${T}">Melden</a>`)
   // Reihenfolge wie im abgestimmten Text: Über · Melden · Impressum · Datenschutz
-  has(html, `Geteilt mit ${APP_NAME} · <a class="foot__link" href="/_/">Über share.fynn.land</a> · <a class="foot__link" href="/_/melden?l=${T}">Melden</a>`)
+  has(html, `Geteilt mit ${APP_NAME} · <a class="foot__link" href="/_/">Über foldwing.online</a> · <a class="foot__link" href="/_/melden?l=${T}">Melden</a>`)
 })
 
 test('bundlePage über den Relay: Teildateien unter /<T>/<F> und /<T>/<F>/d', () => {

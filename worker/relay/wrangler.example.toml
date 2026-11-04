@@ -3,7 +3,7 @@
 # Ausführlich: README.md in diesem Ordner.
 
 name = "foldwing-relay"
-main = "src/index.ts"
+main = "src/worker.ts"
 compatibility_date = "2025-09-01"
 
 # Erreichbar nur über die eigene Domain (Custom Domain, siehe unten), nicht über

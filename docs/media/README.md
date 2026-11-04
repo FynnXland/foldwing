@@ -9,8 +9,8 @@ turns the frames into a GIF with ffmpeg. Nothing here is a screen recording.
 
 | File | What it shows |
 |---|---|
-| `hero.gif` | Three files dropped onto the drop zone become one collection, the progress bar runs, the finished card shows its `share.fynn.land` link, *Link kopieren* (Copy link) turns into *Kopiert* (Copied). Then the page the recipient sees in the browser: the collection with preview tiles and *Alle als ZIP herunterladen* (Download all as ZIP), and `Quartalszahlen.xlsx` opened as a table. About 11 seconds, 20 fps |
-| `app.png` | Main window in the light theme, *Teilen* (Share) tab: the status line (*Links über share.fynn.land · erreichbar*), the drop zone and three shares: the collection with thumbnails, a text file without expiry and a screenshot link with 23 hours left |
+| `hero.gif` | Three files dropped onto the drop zone become one collection, the progress bar runs, the finished card shows its `foldwing.online` link, *Link kopieren* (Copy link) turns into *Kopiert* (Copied). Then the page the recipient sees in the browser: the collection with preview tiles and *Alle als ZIP herunterladen* (Download all as ZIP), and `Quartalszahlen.xlsx` opened as a table. About 11 seconds, 20 fps |
+| `app.png` | Main window in the light theme, *Teilen* (Share) tab: the status line (*Links über foldwing.online · erreichbar*), the drop zone and three shares: the collection with thumbnails, a text file without expiry and a screenshot link with 23 hours left |
 | `share-page.png` | The recipient's page for the collection (light) |
 | `file-preview.png` | The recipient's view of the spreadsheet, dark: the page follows the system's dark mode |
 | `social-preview.png` | GitHub social preview (1280×640), uploaded by hand in the repository settings (*General → Social preview*) |
@@ -24,7 +24,7 @@ screenshots with `width="838"`.
 - The script generates every file itself: `Moodboard.png` and `Grundriss.png` are drawn
   shapes, `Quartalszahlen.xlsx` holds made-up figures, plus `Notizen.txt` and
   `Screenshot 2026-10-14 09-12-48.png`. The user is "alex". Links use the default relay
-  address `https://share.fynn.land/` followed by an invented device ID (`Rk4mT7qa`) and the
+  address `https://foldwing.online/` followed by an invented device ID (`Rk4mT7qa`) and the
   share ID.
 - Clock and IDs are fixed (14 October 2026, 09:41; share IDs come from a seeded random
   source), so every run produces the same images.
@@ -34,7 +34,7 @@ screenshots with `width="838"`.
   upload.
 - Staged: the main process is a stand-in that answers the interface's calls and skips
   the virus scan, the tunnel and the relay. It reports the links as online
-  (*erreichbar*); nothing is sent to `share.fynn.land`. The recipient pages come from the
+  (*erreichbar*); nothing is sent to `foldwing.online`. The recipient pages come from the
   real server on 127.0.0.1 under the same paths the relay would pass through. The window buttons, the mouse pointer, the drag image
   with the "3" badge and the browser bar around the recipient pages are demo elements
   drawn by the script; in real use Windows and the browser draw them. *Kopieren* does

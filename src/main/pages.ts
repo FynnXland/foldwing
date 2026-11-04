@@ -392,7 +392,7 @@ const NO_SHARE: Pick<ShareLinks, 'family' | 'fontBase' | 'token'> = { family: 'l
 
 /**
  * Fußzeile je Pfadfamilie, Wortlaut nach privat/recht (Abschnitt 4). Über den
- * Relay: Über share.fynn.land, Melden, Impressum, Datenschutz (relative Pfade,
+ * Relay: Über foldwing.online, Melden, Impressum, Datenschutz (relative Pfade,
  * der Relay bedient bzw. leitet `/_/…` weiter); im eigenen Netz und auf der
  * eigenen Domain steht nur der Name.
  */
@@ -400,7 +400,7 @@ function footer(links: Pick<ShareLinks, 'family' | 'token'>): string {
   const name = escapeHtml(APP_NAME)
   if (links.family === 'relay' && links.token) {
     const t = escapeHtml(links.token.replace(/[^A-Za-z0-9]/g, ''))
-    return `<div class="foot">Geteilt mit ${name} · <a class="foot__link" href="/_/">Über share.fynn.land</a> · <a class="foot__link" href="/_/melden?l=${t}">Melden</a> · <a class="foot__link" href="/_/impressum">Impressum</a> · <a class="foot__link" href="/_/datenschutz">Datenschutz</a></div>`
+    return `<div class="foot">Geteilt mit ${name} · <a class="foot__link" href="/_/">Über foldwing.online</a> · <a class="foot__link" href="/_/melden?l=${t}">Melden</a> · <a class="foot__link" href="/_/impressum">Impressum</a> · <a class="foot__link" href="/_/datenschutz">Datenschutz</a></div>`
   }
   return `<div class="foot">Geteilt mit ${name}</div>`
 }

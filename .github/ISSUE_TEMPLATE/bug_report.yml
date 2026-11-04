@@ -53,7 +53,7 @@ body:
       label: How do recipients reach your links?
       description: "Settings → card *Links* shows the mode."
       options:
-        - Internet (share.fynn.land, the default)
+        - Internet (foldwing.online, the default)
         - Only in my own network
         - Own domain with my own Cloudflare Tunnel
         - Not sure

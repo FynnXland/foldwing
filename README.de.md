@@ -42,7 +42,7 @@ deinem PC läuft.
 flowchart LR
     A["Dateien in<br/>Foldwing ziehen"] --> B["Virenscan<br/>auf deinem PC"]
     B --> C{"Betriebsart"}
-    C -->|"Internet, Standard"| D["share.fynn.land<br/>Relay + Quick Tunnel"]
+    C -->|"Internet, Standard"| D["foldwing.online<br/>Relay + Quick Tunnel"]
     C -->|"Eigenes Netzwerk"| E["Netzwerk-Adresse<br/>deines PCs"]
     C -->|"Eigene Domain"| G["Deine Domain<br/>über deinen Tunnel"]
     D --> F["Vorschau im Browser,<br/>Download des Originals"]
@@ -54,7 +54,7 @@ Geteilte Dateien liegen auf deinem PC, und bevor der Link erscheint, prüft der 
 deines Systems jede einzelne. Ein eingebauter Webserver liefert Freigabe-Seiten, Vorschauen und
 Downloads aus, allerdings nur, solange etwas geteilt ist. In der Standard-Betriebsart öffnet
 Foldwing einen Cloudflare Quick Tunnel (ohne Konto) und sagt dem Relay unter
-`share.fynn.land`, wo dein PC gerade erreichbar ist. Ruft jemand den Link auf, reicht der Relay
+`foldwing.online`, wo dein PC gerade erreichbar ist. Ruft jemand den Link auf, reicht der Relay
 die Seite durch und leitet den Download an den Tunnel deines PCs weiter; Dateien speichert er
 nicht, und in ihren Inhalt schaut er nicht hinein. Die Seiten führen keine Skripte aus,
 Vorschauen entstehen auf deinem PC. Mehr dazu (englisch):
@@ -67,7 +67,7 @@ Statuszeile über der Ablage.
 
 | Betriebsart | So sehen Links aus | Was deinen PC verlässt |
 |---|---|---|
-| **Internet** (Standard): *Über das Internet* | `https://share.fynn.land/<id>`, gehen überall | Tunnel-Adresse und eine Kennung gehen an den Relay. Seiten laufen durch den Relay, Dateien über den Quick Tunnel direkt zum Empfänger. Beides transportiert Cloudflare. |
+| **Internet** (Standard): *Über das Internet* | `https://foldwing.online/<id>`, gehen überall | Tunnel-Adresse und eine Kennung gehen an den Relay. Seiten laufen durch den Relay, Dateien über den Quick Tunnel direkt zum Empfänger. Beides transportiert Cloudflare. |
 | **Eigenes Netzwerk**: *Nur im eigenen Netzwerk* | `http://192.168.1.20:8787/s/<id>`, gehen auf Geräten im selben Netzwerk | Nichts geht an fremde Dienste. |
 | **Eigene Domain**: *Über deine eigene Domain* ([Anleitung](docs/cloudflare-tunnel.de.md)) | `https://share.example.com/s/<id>`, gehen überall | Downloads laufen durch deinen eigenen Cloudflare-Tunnel, der Relay ist nicht beteiligt. Du brauchst ein kostenloses Cloudflare-Konto und eine Domain darin. |
 
@@ -115,7 +115,7 @@ gehen dann erst wieder, wenn du zurückwechselst.
 ## Ein Blick hinein
 
 <p align="center">
-  <img src="docs/media/app.png" width="838" alt="Das Foldwing-Hauptfenster im hellen Design im Reiter Teilen. Eine Statuszeile meldet, dass die Links über share.fynn.land laufen und erreichbar sind; darunter die Ablage und drei Freigaben: eine Sammlung aus drei Dateien, eine Textdatei und ein Screenshot, der in 23 Stunden abläuft, jeweils mit share.fynn.land-Link, Kopieren-Knopf und Ablaufzeit.">
+  <img src="docs/media/app.png" width="838" alt="Das Foldwing-Hauptfenster im hellen Design im Reiter Teilen. Eine Statuszeile meldet, dass die Links über foldwing.online laufen und erreichbar sind; darunter die Ablage und drei Freigaben: eine Sammlung aus drei Dateien, eine Textdatei und ein Screenshot, der in 23 Stunden abläuft, jeweils mit foldwing.online-Link, Kopieren-Knopf und Ablaufzeit.">
 </p>
 
 **Deine Freigaben auf einen Blick:** Oben sagt die Statuszeile, wohin die Links führen und ob
@@ -162,7 +162,7 @@ Speicherplatz für deine Freigaben.
 ### Erster Start
 
 Starte Foldwing und zieh eine Datei ins Fenster. Beim ersten Mal erklärt ein Hinweis, dass
-Internet-Links über `share.fynn.land` laufen, und verlinkt Regeln und Datenschutz des Relays.
+Internet-Links über `foldwing.online` laufen, und verlinkt Regeln und Datenschutz des Relays.
 Mit *Okay, Link erstellen* geht es los; *Nur im eigenen Netzwerk teilen* bleibt offline. Ein
 paar Sekunden später, sobald der Tunnel steht, erscheint eine Karte mit dem Link, und
 *Link kopieren* legt ihn in die Zwischenablage.
@@ -234,7 +234,7 @@ anderswo, nicht einmal Schriften. Ein Passwort haben Links nicht: Wer einen Link
 
 | Wann | Was geht wohin |
 |---|---|
-| Du teilst etwas im Modus *Internet* | Das mitgelieferte cloudflared öffnet einen Quick Tunnel zu Cloudflare. Danach meldet sich Foldwing bei `share.fynn.land` an: mit einer zufälligen Geräte-ID, einem Geheimnis (der Relay behält nur dessen Hash), der Tunnel-Adresse und der App-Version. Das wiederholt sich alle 6 Stunden, solange etwas geteilt ist; eine Minute nach der letzten Freigabe meldet sich die App ab. |
+| Du teilst etwas im Modus *Internet* | Das mitgelieferte cloudflared öffnet einen Quick Tunnel zu Cloudflare. Danach meldet sich Foldwing bei `foldwing.online` an: mit einer zufälligen Geräte-ID, einem Geheimnis (der Relay behält nur dessen Hash), der Tunnel-Adresse und der App-Version. Das wiederholt sich alle 6 Stunden, solange etwas geteilt ist; eine Minute nach der letzten Freigabe meldet sich die App ab. |
 | Jemand öffnet einen Internet-Link | Die Seite geht von deinem PC durch den Tunnel und den Relay zu dieser Person. Die Datei selbst, und auch Bilder und Videos auf der Seite, kommen direkt aus deinem Tunnel; der Relay leitet nur weiter. Dein PC sieht die IP-Adresse des Empfängers, wie bei jedem direkten Download. |
 | *Eigene Domain* ist eingerichtet und etwas ist geteilt | cloudflared hält eine Verbindung zu deinem Cloudflare-Konto, Downloads laufen über Cloudflare. |
 | Update-Prüfung (standardmäßig an) | Etwa 20 Sekunden nach dem Start und dann alle 6 Stunden fragt Foldwing bei GitHub nach einer neuen Version; Installer und AppImage laden sie gleich herunter. Abschalten unter Einstellungen → *Updates* → *Automatisch nach Updates suchen*. |
@@ -265,7 +265,7 @@ nicht deine Daten. Für alles zusammen lösch zusätzlich `%APPDATA%\foldwing`,
 |---|---|
 | **Empfänger sehen „Der Rechner, auf dem diese Datei liegt, ist gerade nicht online.“** | Links gehen nur, solange Foldwing läuft und dein PC wach und online ist. Direkt nach dem Teilen braucht der Tunnel ein paar Sekunden. Das Fenster zu schließen ist kein Problem; *Beenden* im Infobereich nimmt die Links vom Netz. |
 | **Der Status bleibt bei *Wartet auf dich*** | Der Hinweis zu Internet-Links ist noch offen. Öffne das Foldwing-Fenster und bestätige ihn. |
-| **Der Status sagt, das Gerät ist gesperrt** | Nach einer Meldung hat der Relay dieses Gerät gesperrt. Im eigenen Netzwerk kannst du weiter teilen. Hältst du das für einen Fehler, schreib an die Kontaktadresse auf [share.fynn.land/_/](https://share.fynn.land/_/) und nenn die Geräte-ID, die die App zeigt. |
+| **Der Status sagt, das Gerät ist gesperrt** | Nach einer Meldung hat der Relay dieses Gerät gesperrt. Im eigenen Netzwerk kannst du weiter teilen. Hältst du das für einen Fehler, schreib an die Kontaktadresse auf [foldwing.online/_/](https://foldwing.online/_/) und nenn die Geräte-ID, die die App zeigt. |
 | **Nach einer Änderung gehen Links nicht mehr** | Ein Wechsel unter Einstellungen → *Links* ändert jeden Link. Schick den neuen Link oder wechsle zurück. |
 | **Andere im Netzwerk erreichen einen Link nicht** (*Nur im eigenen Netzwerk*) | Hast du die Windows-Frage beim ersten Teilen abgelehnt, erlaube Foldwing für private Netzwerke unter *Windows-Sicherheit → Firewall- & Netzwerkschutz → Zugriff von App durch Firewall zulassen*. Gäste-WLANs trennen Geräte oft voneinander. |
 | **Netzwerk-Links zeigen die falsche Adresse** (VPN, Hyper-V oder WSL) | Foldwing nimmt die erste nicht interne IPv4-Adresse deines PCs, und die kann zu einem virtuellen Netzwerkadapter gehören. Trenn das VPN oder nimm den Modus *Internet*. |
@@ -318,10 +318,10 @@ Word-Vorschau, [SheetJS](https://sheetjs.com) für die Tabellen-Vorschau, die
 außerdem Komponenten anderer unter deren eigenen Lizenzen; die Liste steht in
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-**Der öffentliche Relay.** Internet-Links laufen über share.fynn.land, einen Relay, den eine
+**Der öffentliche Relay.** Internet-Links laufen über foldwing.online, einen Relay, den eine
 Privatperson kostenlos betreibt. Er reicht Anfragen an deinen Rechner durch und speichert keine
 Dateien. Regeln, Datenschutz und Impressum findest du über
-[share.fynn.land/_/](https://share.fynn.land/_/). Der Relay kann sich ändern, langsamer werden
+[foldwing.online/_/](https://foldwing.online/_/). Der Relay kann sich ändern, langsamer werden
 oder eingestellt werden. Wenn du dich auf Links verlassen musst, nimm eine eigene Domain mit
 eigenem Cloudflare-Konto ([Anleitung](docs/cloudflare-tunnel.de.md)); dann ist der Relay nicht
 beteiligt.

@@ -55,12 +55,14 @@ App in die Ablage (Fenster, Rechtsklick-Eintrag, Screenshots) – es gibt keinen
 Upload-Endpunkt.
 
 **Betriebsarten** (`linkMode` in der Config, Karte „Links“ in den Einstellungen):
-- **`relay`** (Standard): Links `https://share.fynn.land/<T>` mit `T` = Geräte-ID `D`
+- **`relay`** (Standard): Links `https://foldwing.online/<T>` mit `T` = Geräte-ID `D`
   (8 Zeichen base62) + Freigabe-ID `S` (10 Zeichen). Die App startet einen **Cloudflare Quick
   Tunnel** ohne Konto, prüft `<tunnel>/api/health` selbst und meldet die Tunnel-Adresse beim
   Relay an (`POST /_/api/register`, Heartbeat alle 6 h, Abmeldung, wenn nichts mehr geteilt
   ist). Der Server lauscht dann nur auf `127.0.0.1`. Vor der ersten Anmeldung muss der
-  Hinweis-Dialog (`RelayNotice.tsx`, `relay.noticeAccepted`) bestätigt sein.
+  Hinweis-Dialog (`RelayNotice.tsx`, `relay.noticeAccepted`) bestätigt sein. Der Worker
+  antwortet auch unter der alten Adresse `share.fynn.land` (Links und Apps aus 1.4.0);
+  diese Route nicht entfernen.
 - **`lan`**: Links `http://<LAN-IP>:8787/s/<S>`, kein Tunnel, nichts geht nach außen.
 - **`domain`**: eigene Domain mit eigenem Cloudflare-Tunnel **per Token**,
   Links `<publicBaseUrl>/s/<S>`; der Relay ist nicht beteiligt.
@@ -144,8 +146,9 @@ src/renderer/         React-UI (Browser-Umgebung, KEIN Node/fs)
   src/components/     Dropzone, ShareView, ShareCard, SettingsView, RelayNotice, TunnelBanner,
                       UpdateBanner, Header, Icon, Logo, CaptureOverlay, CaptureActions
   src/lib/            upload.ts (Chunks), hotkey.ts (Kürzel aufnehmen), format.ts
-worker/relay/         Relay-Worker: src/ (router, proxy, register, store, pages, ids,
-                      security, http), schema.sql, README.md, wrangler.example.toml
+worker/relay/         Relay-Worker: src/ (worker = main mit RPC-Einstieg Admin, index, router,
+                      proxy, register, store, moderation, pages, ids, security, http),
+                      schema.sql, README.md, wrangler.example.toml
 worker/scripts/       moderate.mjs (Links/Geräte sperren, entsperren, nachschlagen)
 resources/            fonts/; lokal und ignoriert: cloudflared.exe, cloudflared-linux-amd64
 build/                Icons, installer.nsh (Aufräumen beim Deinstallieren)
@@ -327,7 +330,8 @@ Screenshots oder Commits:
 - **`privat/`** – Arbeitsnotizen (Bauplan, Rechtliches) bleiben lokal.
 - **Echte Daten:** Beispiele und Medien nur mit erfundenen Daten, Domain `example.com`,
   Nutzer „Alex“. Keine Klarnamen, privaten Mailadressen, Heimatpfade oder echten Domains.
-  Ausnahme: der Standard-Relay `https://share.fynn.land` ist bewusst öffentlich.
+  Ausnahme: der Standard-Relay `https://foldwing.online` (früher `share.fynn.land`) ist
+  bewusst öffentlich.
 
 `tests/repo-guards.test.mjs` sucht nach Schlüsselformaten, Heimatpfaden und prüft, dass
 diese Dateien unverfolgt bleiben – das fängt nur die gröbsten Fälle.

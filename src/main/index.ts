@@ -145,7 +145,7 @@ let appIsReady = false
 let pendingSharePaths: string[] = []
 let pendingShowWindow = false
 
-/** Relay: Basis-URL (Standard share.fynn.land; nur für Tests per Umgebung änderbar). */
+/** Relay: Basis-URL (Standard foldwing.online; nur für Tests per Umgebung änderbar). */
 const RELAY_BASE = relayBaseUrl()
 const REPO_URL = 'https://github.com/FynnXland/foldwing'
 

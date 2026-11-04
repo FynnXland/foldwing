@@ -4,6 +4,14 @@ Was sich für Nutzer von Foldwing (bis 1.3.0 FlowShare) geändert hat, neueste z
 
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.4.1] - 2026-11-04
+
+**Internet-Links laufen jetzt über foldwing.online.** Links, die du schon verschickt hast, gehen weiter.
+
+### Geändert
+
+- Neue Links sehen so aus: `https://foldwing.online/…` statt `https://share.fynn.land/…`. Dahinter steckt derselbe Relay, deshalb bleiben ältere Links gültig, und Foldwing 1.4.0 teilt bis zum Update weiter wie bisher.
+
 ## [1.4.0] - 2026-11-04
 
 **Foldwing ist Open Source, und deine Links gehen jetzt überall, ohne Konto und ohne Einrichtung.** Die Dateien bleiben dabei auf deinem PC.

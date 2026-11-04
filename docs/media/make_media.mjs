@@ -11,7 +11,7 @@
  *
  * Wie: Electron lädt die GEBAUTE Oberfläche (out/renderer) mit der echten Preload-
  * Brücke (out/preload, window.foldwing). Nur der Hauptprozess ist eine Attrappe: Er
- * beantwortet die IPC-Aufrufe der Oberfläche, meldet die Links als „über share.fynn.land
+ * beantwortet die IPC-Aufrufe der Oberfläche, meldet die Links als „über foldwing.online
  * erreichbar“ und legt Uploads in einer echten ShareStore-Ablage im Temp-Ordner ab. Die
  * Seiten des Empfängers liefert der echte Server (src/main/server.ts, per esbuild
  * gebündelt) auf 127.0.0.1, über die Relay-Pfade (/<Geräte-ID><Freigabe-ID>) mit einer
@@ -56,7 +56,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(HERE, '..', '..')
 const USER = 'alex'
 /** Standard-Relay der App; Links sehen im Bild so aus wie bei jedem Nutzer. */
-const RELAY_URL = 'https://share.fynn.land'
+const RELAY_URL = 'https://foldwing.online'
 /** Erfundene Geräte-ID (8 Zeichen base62). Ein echtes Gerät hat eine zufällige. */
 const DEVICE_ID = 'Rk4mT7qa'
 const shareUrl = (id) => `${RELAY_URL}/${DEVICE_ID}${id}`

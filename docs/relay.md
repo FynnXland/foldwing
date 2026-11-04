@@ -1,6 +1,6 @@
 # The relay
 
-Status: Foldwing 1.4.0. For people who want to know what happens to their links in the
+Status: Foldwing 1.4.1. For people who want to know what happens to their links in the
 default mode, and for anyone who runs a relay of their own. The worker's own setup guide (in
 German) is [worker/relay/README.md](../worker/relay/README.md); the source code is the final
 authority.
@@ -13,11 +13,12 @@ that without an account: when something is shared, it starts a Cloudflare
 which gives the PC a random public address such as `https://<random>.trycloudflare.com`.
 That address changes every time the tunnel restarts, so it can't be the link you send.
 
-The relay at `https://share.fynn.land` is the stable part. It is a Cloudflare Worker that only
+The relay at `https://foldwing.online` is the stable part. It is a Cloudflare Worker that only
 remembers which tunnel address belongs to which device. A link looks like
-`https://share.fynn.land/<T>`, where `T` is 18 characters: the device ID `D` (8 characters,
+`https://foldwing.online/<T>`, where `T` is 18 characters: the device ID `D` (8 characters,
 created once per installation) followed by the share ID `S` (10 characters). Both are random
-base62 strings.
+base62 strings. Links from Foldwing 1.4.0 use the old address `share.fynn.land`; it points
+to the same relay and keeps working.
 
 The relay stores no files and keeps no copy of any page. Files never pass through it.
 
@@ -27,7 +28,7 @@ The relay stores no files and keeps no copy of any page. Files never pass throug
 sequenceDiagram
     participant App as Foldwing on your PC
     participant QT as Quick Tunnel<br/>(Cloudflare)
-    participant R as Relay<br/>share.fynn.land
+    participant R as Relay<br/>foldwing.online
     participant B as Recipient's browser
     App->>QT: start cloudflared, get https://x.trycloudflare.com
     App->>QT: GET /api/health (self-test)
@@ -139,6 +140,11 @@ operator's contact address. The operator checks the report and blocks either one
 a whole device (`D`) with `worker/scripts/moderate.mjs`. Visitors of a blocked link see a 451
 page with the date, a fixed reason and how to object; a blocked device can't register any more
 and the app says so. A block takes effect everywhere within 30 seconds.
+
+The same actions are available to an admin dashboard through the RPC entrypoint `Admin`
+(`worker/relay/src/worker.ts`). It has no public address: only another Worker in the same
+Cloudflare account can reach it, through a service binding with `entrypoint = "Admin"`. It
+reads and writes the same two tables as the script and never returns the tunnel address.
 
 Security problems in the relay itself are not reports of content: see
 [SECURITY.md](../SECURITY.md).

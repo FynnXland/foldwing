@@ -29,7 +29,7 @@ npm run dev          # starts the app from source
   the installed app's window.
 - Runs from source don't register the right-click entry or the autostart entry and never check
   for updates. Only the installed app registers those entries.
-- **Internet links from source** register with the public relay `share.fynn.land` like the
+- **Internet links from source** register with the public relay `foldwing.online` like the
   installed app. To work against a relay of your own, for example `npx wrangler dev` in
   `worker/relay`, set `FOLDWING_RELAY_URL` before `npm run dev`. Details:
   [docs/relay.md](docs/relay.md).

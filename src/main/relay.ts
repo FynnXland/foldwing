@@ -1,7 +1,7 @@
 /**
  * Relay-Modus – elektronfreie Client-Logik (getestet in tests/relay.test.ts).
  *
- * Links laufen über einen öffentlichen Relay (`https://share.fynn.land/<T>`), der
+ * Links laufen über einen öffentlichen Relay (`https://foldwing.online/<T>`), der
  * keine Dateien speichert, sondern nur weiß, unter welcher Quick-Tunnel-Adresse
  * ein Gerät gerade erreichbar ist. `T` ist Geräte-ID (8 Zeichen) + Freigabe-ID
  * (10 Zeichen). Die App meldet sich mit Geräte-ID und Geheimnis an, sobald ihr
@@ -14,7 +14,7 @@
 import { randomBytes } from 'crypto'
 
 /** Öffentlicher Standard-Relay. */
-export const DEFAULT_RELAY_URL = 'https://share.fynn.land'
+export const DEFAULT_RELAY_URL = 'https://foldwing.online'
 
 /** Seiten des Relays, auf die die App verlinkt (Kurzwege, der Relay leitet weiter). */
 export const RELAY_INFO_PATH = '/_/'
@@ -69,7 +69,7 @@ export function makeSecret(rand: (n: number) => Buffer = randomBytes): string {
 }
 
 /**
- * Relay-Basis: Standard ist share.fynn.land. Nur für Tests und Entwicklung per
+ * Relay-Basis: Standard ist foldwing.online. Nur für Tests und Entwicklung per
  * FOLDWING_RELAY_URL überschreibbar; Unbrauchbares fällt auf den Standard zurück.
  */
 export function relayBaseUrl(env: Record<string, string | undefined> = process.env): string {
@@ -238,14 +238,14 @@ export interface RelayDeps {
 const TEXTS = {
   idle: 'Ruht, bis du etwas teilst.',
   selftest: 'Verbinde …',
-  register: 'Anmeldung bei share.fynn.land …',
+  register: 'Anmeldung bei foldwing.online …',
   online: 'Online. Deine Links funktionieren.',
   offline: 'Gerade offline. Gleich kommt ein neuer Versuch.',
   unreachable: 'Dein Rechner ist von außen noch nicht erreichbar. Ein neuer Versuch läuft.',
   blocked:
-    'Dieses Gerät ist für share.fynn.land gesperrt, deshalb gibt es gerade keine Internet-Links. Im eigenen Netzwerk kannst du weiter teilen.',
-  taken: 'Die Anmeldung bei share.fynn.land hat nicht geklappt.',
-  invalid: 'share.fynn.land hat die Anmeldung abgelehnt.'
+    'Dieses Gerät ist für foldwing.online gesperrt, deshalb gibt es gerade keine Internet-Links. Im eigenen Netzwerk kannst du weiter teilen.',
+  taken: 'Die Anmeldung bei foldwing.online hat nicht geklappt.',
+  invalid: 'foldwing.online hat die Anmeldung abgelehnt.'
 }
 
 /**

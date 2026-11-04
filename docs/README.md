@@ -6,7 +6,7 @@ document states the version it describes.
 
 | Document | Language | What it covers |
 |---|---|---|
-| [relay.md](relay.md) | English | How internet links work: the public relay `share.fynn.land`, the data flow, what is stored and for how long, security measures, reports, running your own relay. **Start here if you want to know what happens to your links.** |
+| [relay.md](relay.md) | English | How internet links work: the public relay `foldwing.online`, the data flow, what is stored and for how long, security measures, reports, running your own relay. **Start here if you want to know what happens to your links.** |
 | [cloudflare-tunnel.md](cloudflare-tunnel.md) | English | The *Eigene Domain* mode: links on your own domain through your own Cloudflare Tunnel, step by step |
 | [cloudflare-tunnel.de.md](cloudflare-tunnel.de.md) | German | The same guide in German |
 | [architecture.md](architecture.md) | English | Processes, upload path, path families, HTTP server and security headers, previews, sharing on demand, relay client, tunnel, updates, screenshots, platform seams. **Start here if you want to contribute code.** |

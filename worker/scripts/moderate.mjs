@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 // Moderation für den Foldwing-Relay: Links oder Geräte sperren, entsperren, ansehen.
+// Notweg über die Kommandozeile; dieselbe Logik mit gebundenem SQL steht in
+// worker/relay/src/moderation.ts (RPC-Einstieg Admin). Kategorien und parseTarget
+// müssen in beiden gleich bleiben (tests/relay-admin.test.ts).
 //
 //   node worker/scripts/moderate.mjs block   <link|T|D> <kategorie>
 //   node worker/scripts/moderate.mjs unblock <link|T|D>

@@ -17,6 +17,8 @@ export interface D1PreparedStatement {
 
 export interface D1Database {
   prepare(query: string): D1PreparedStatement
+  /** Mehrere Anweisungen in einer Transaktion (alle oder keine). */
+  batch(statements: D1PreparedStatement[]): Promise<D1Result[]>
 }
 
 /** Workers-Rate-Limiting-Binding (`[[ratelimits]]` in der wrangler.toml). */

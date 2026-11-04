@@ -1,6 +1,6 @@
 # Foldwing architecture
 
-Status: Foldwing 1.4.0. This page is for contributors: how a file travels from the window to
+Status: Foldwing 1.4.1. This page is for contributors: how a file travels from the window to
 a recipient's browser, which module does what, and why the server is not always running. The
 source code is the final authority. Code comments are in German.
 
@@ -27,7 +27,7 @@ flowchart LR
         CFD --> SRV
     end
     LAN["Browser in<br/>your network"] -->|"lan mode"| SRV
-    RELAY["Relay<br/>share.fynn.land"] -->|"pages"| CFD
+    RELAY["Relay<br/>foldwing.online"] -->|"pages"| CFD
     WEB["Browser<br/>anywhere"] -->|"relay mode"| RELAY
     WEB -->|"files, domain mode"| CFD
 ```
@@ -39,7 +39,7 @@ needed (see *Sharing on demand*). Recipients reach it in one of three ways, chos
 
 | `linkMode` | Link | Server listens on | Tunnel |
 |---|---|---|---|
-| `relay` (default) | `https://share.fynn.land/<T>` | `127.0.0.1` | Quick Tunnel, no account |
+| `relay` (default) | `https://foldwing.online/<T>` | `127.0.0.1` | Quick Tunnel, no account |
 | `lan` | `http://<LAN IP>:<port>/s/<S>` | all interfaces | none |
 | `domain` | `<publicBaseUrl>/s/<S>` | all interfaces | your own tunnel by token |
 
@@ -181,7 +181,7 @@ waiting for the relay note, connecting, online, offline, blocked or error.
 Everything Electron provides (timers, `safeStorage`, fetch) comes in by injection, so
 `tests/relay.test.ts` runs without the app.
 
-The relay base is the constant `DEFAULT_RELAY_URL` (`https://share.fynn.land`); only for tests
+The relay base is the constant `DEFAULT_RELAY_URL` (`https://foldwing.online`); only for tests
 and development, `FOLDWING_RELAY_URL` overrides it. The device ID and the secret are created
 on first use and stored in the configuration; the secret is encrypted with `safeStorage`
 (`encodeSecret()`), or base64 with a `b64:` marker where no keyring is available. The app

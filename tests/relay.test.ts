@@ -47,9 +47,9 @@ test('randomBase62: Bytes ab 248 werden verworfen (kein Modulo-Bias)', () => {
   assert.equal(call, 2)
 })
 
-test('relayBaseUrl: Standard share.fynn.land, nur gültige Überschreibung', () => {
+test('relayBaseUrl: Standard foldwing.online, nur gültige Überschreibung', () => {
   assert.equal(relayBaseUrl({}), DEFAULT_RELAY_URL)
-  assert.equal(DEFAULT_RELAY_URL, 'https://share.fynn.land')
+  assert.equal(DEFAULT_RELAY_URL, 'https://foldwing.online')
   assert.equal(relayBaseUrl({ FOLDWING_RELAY_URL: 'http://127.0.0.1:8011/' }), 'http://127.0.0.1:8011')
   for (const bad of ['ftp://x.example.com', 'kein url', 'https://u:p@example.com', 'https://example.com/?a=1']) {
     assert.equal(relayBaseUrl({ FOLDWING_RELAY_URL: bad }), DEFAULT_RELAY_URL, bad)
@@ -57,7 +57,7 @@ test('relayBaseUrl: Standard share.fynn.land, nur gültige Überschreibung', () 
 })
 
 test('relayShareUrl und splitToken: T = Geräte-ID + Freigabe-ID', () => {
-  assert.equal(relayShareUrl('https://share.fynn.land/', 'Ab3dEf7h', 'Q1w2E3r4T5'), 'https://share.fynn.land/Ab3dEf7hQ1w2E3r4T5')
+  assert.equal(relayShareUrl('https://foldwing.online/', 'Ab3dEf7h', 'Q1w2E3r4T5'), 'https://foldwing.online/Ab3dEf7hQ1w2E3r4T5')
   assert.deepEqual(splitToken('Ab3dEf7hQ1w2E3r4T5'), { deviceId: 'Ab3dEf7h', shareId: 'Q1w2E3r4T5' })
   assert.equal(splitToken('Ab3dEf7hQ1w2E3r4T'), null)
   assert.equal(splitToken('Ab3dEf7hQ1w2E3r4T5x'), null)

@@ -77,7 +77,7 @@ export function RelayNotice({ rulesUrl, privacyUrl, onAccept, onLanOnly, onLater
           Dein erster Internet-Link
         </h2>
         <p id="relay-notice-text" className="modal__text">
-          Damit der Link aus dem Internet funktioniert, läuft er über share.fynn.land. Deine Dateien
+          Damit der Link aus dem Internet funktioniert, läuft er über foldwing.online. Deine Dateien
           bleiben auf deinem Rechner; der Relay reicht sie nur durch und speichert nichts. Teile
           bitte nur, was du teilen darfst; rechtswidrige Links sperre ich.
         </p>

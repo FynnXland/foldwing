@@ -331,7 +331,7 @@ export function SettingsView({
   const guideUrl = about ? `${about.repoUrl}/blob/main/docs/cloudflare-tunnel.de.md` : ''
 
   const mode = links?.mode ?? 'relay'
-  const relayHost = links?.relayBase ? host(links.relayBase) : 'share.fynn.land'
+  const relayHost = links?.relayBase ? host(links.relayBase) : 'foldwing.online'
   const domainPending = showDomain && mode !== 'domain'
   const hotkeyText = cap?.hotkey ? hotkeyLabel(cap.hotkey, PLATFORM) : ''
 

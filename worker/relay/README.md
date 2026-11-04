@@ -14,7 +14,9 @@ Der Relay speichert **keine Dateien**. Sie bleiben auf dem Rechner der teilenden
 
 | Datei | Inhalt |
 | --- | --- |
-| `src/index.ts` | Einstieg für die Workers-Laufzeit |
+| `src/worker.ts` | `main` für die Workers-Laufzeit: der Relay und der RPC-Einstieg `Admin` |
+| `src/index.ts` | Der Relay selbst (ohne `cloudflare:workers`, damit die Tests ihn in Node laden) |
+| `src/moderation.ts` | Sperren, Entsperren, Nachschlagen für den Einstieg `Admin` |
 | `src/router.ts` | Routing, Besucher-Aufrufe, Weiterleitung der Rohdaten, Cron |
 | `src/proxy.ts` | Durchreichen von Seiten und Schriften: Header-Allowlists, Status-Filter, Sicherheits-Header |
 | `src/register.ts` | `POST /_/api/register` und `/_/api/unregister` |
@@ -24,7 +26,8 @@ Der Relay speichert **keine Dateien**. Sie bleiben auf dem Rechner der teilenden
 | `schema.sql` | Tabellen `devices` und `blocked_links` |
 | `../scripts/moderate.mjs` | Sperren, Entsperren, Nachschlagen |
 
-Die Tests stehen in `tests/relay-worker.test.ts` im Repo (`node scripts/test.mjs relay-worker`).
+Die Tests stehen in `tests/relay-worker.test.ts` und `tests/relay-admin.test.ts` im Repo
+(`node scripts/test.mjs relay`).
 Typprüfung: `npx tsc --noEmit -p worker/relay`.
 
 ## Pfade
@@ -128,6 +131,17 @@ node worker/scripts/moderate.mjs list
 Das Skript ruft `npx wrangler@4 d1 execute … --remote` im Ordner `worker/relay` auf (ohne
 Shell). Eine Sperre greift nach spätestens 30 Sekunden überall, so lange merkt sich jeder
 Worker-Prozess eine Zuordnung.
+
+### Moderation über das Admin-Dashboard
+
+Dieselben Aktionen gibt es als RPC-Einstieg `Admin` (`src/worker.ts`, Logik in
+`src/moderation.ts`): `categories()`, `counts()`, `list()`, `lookup(ziel)`,
+`block(ziel, kategorie)` und `unblock(ziel)`. Er hat keine Adresse im Internet. Erreichbar ist
+er nur für einen anderen Worker im selben Cloudflare-Konto, der ihn per Service Binding mit
+`entrypoint = "Admin"` einbindet. Die Methoden werfen nie, Fehler kommen als
+`{ ok: false, code, error }` (`badTarget`, `badCategory`, `serverError`). Anders als das Skript
+gibt `lookup` die Tunnel-Adresse nicht heraus. Das Skript bleibt als Notweg; ein Test hält
+Kategorien und Zielerkennung in beiden gleich.
 
 Um eine gemeldete Datei anzusehen, öffne den Link selbst. Das klappt nur, solange der
 Rechner der teilenden Person online ist.

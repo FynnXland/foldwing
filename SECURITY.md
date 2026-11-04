@@ -12,7 +12,7 @@ the .deb show a note when a new version is out. If you build from source, use th
 **Please don't open a public issue for security problems.** Report them privately via GitHub:
 [**Report a vulnerability**](https://github.com/FynnXland/foldwing/security/advisories/new)
 (also on the repository's *Security* tab). This covers the app and the relay code in
-`worker/relay/`, including weaknesses of the public relay `share.fynn.land` itself.
+`worker/relay/`, including weaknesses of the public relay `foldwing.online` itself.
 
 Helpful to include:
 
@@ -33,8 +33,8 @@ and you are credited if you want to be.
 
 ## Reporting abuse
 
-A link on `share.fynn.land` with illegal content is not a security problem. Use *Melden*
-(Report) at the bottom of the shared page, or open `https://share.fynn.land/_/melden`. The
+A link on `foldwing.online` with illegal content is not a security problem. Use *Melden*
+(Report) at the bottom of the shared page, or open `https://foldwing.online/_/melden`. The
 operator checks every report and blocks the link or the device if it is justified. Please
 don't report content through GitHub issues or security advisories.
 

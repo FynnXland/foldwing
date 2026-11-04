@@ -1,6 +1,6 @@
 # Releasing Foldwing
 
-Status: Foldwing 1.4.0. For the maintainer. Every public step (tag, push, publishing a
+Status: Foldwing 1.4.1. For the maintainer. Every public step (tag, push, publishing a
 release, relay deploy) happens only when the maintainer decides to.
 
 Releases are built by GitHub Actions, never on a local machine: the workflow
