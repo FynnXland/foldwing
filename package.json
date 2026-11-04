@@ -1,6 +1,6 @@
 {
   "name": "foldwing",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Selbst gehostetes Datei-Sharing – verlustfrei, per Link teilen.",
   "homepage": "https://github.com/FynnXland/foldwing",
   "main": "./out/main/index.js",

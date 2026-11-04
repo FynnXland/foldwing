@@ -4,6 +4,14 @@ Was sich für Nutzer von Foldwing (bis 1.3.0 FlowShare) geändert hat, neueste z
 
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.4.2] - 2026-11-04
+
+**Jetzt haben alle dieselbe Fassung mit den Korrekturen aus 1.4.1.**
+
+### Behoben
+
+- Wer sehr früh auf 1.4.1 aktualisiert hat, bekam eine Fassung ohne die beiden Korrekturen („Wirklich löschen?“ beim Drüberfahren und die doppelte Anzeige beim Verbinden). Mit 1.4.2 sind sie überall drin. Sonst ändert sich nichts.
+
 ## [1.4.1] - 2026-11-04
 
 **Internet-Links laufen jetzt über foldwing.online.** Links, die du schon verschickt hast, gehen weiter.
