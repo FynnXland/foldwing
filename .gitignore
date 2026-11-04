@@ -1,0 +1,65 @@
+# Abhängigkeiten und Build-Ausgaben
+node_modules/
+out/
+dist/
+release/
+*.tsbuildinfo
+.vite/
+*.timestamp-*.mjs
+*.tgz
+
+# Test-Bundles (scripts/test.mjs bündelt die Tests hierher)
+.test-out/
+.test-out-*/
+
+# Logs und Diagnose-Berichte von Node
+*.log
+npm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Caches von Werkzeugen
+.npm/
+.eslintcache
+.cache/
+.wrangler/
+
+# Editor- und Betriebssystem-Dateien
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Lokale Werkzeug-Konfiguration
+.claude/
+
+# Erzeugt von scripts/make-icon.mjs
+build/portable-splash.bmp
+
+# Lokale Arbeitsordner
+import/
+
+# cloudflared für den Installer: lädt scripts/fetch-cloudflared.mjs
+resources/cloudflared.exe
+resources/cloudflared-linux-amd64
+resources/*.download
+resources/*.bak
+
+# Lokale Team-Konfiguration, Vorlage: resources/team.example.json
+resources/team.json
+
+# Lokale Deploy-Konfiguration des Workers, Vorlage: worker/wrangler.example.toml
+worker/wrangler.toml
+# Dasselbe für den Relay, Vorlage: worker/relay/wrangler.example.toml
+worker/relay/wrangler.toml
+
+# Zugangsdaten und Schlüsseldateien jeder Art
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx

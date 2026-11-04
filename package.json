@@ -1,0 +1,156 @@
+{
+  "name": "foldwing",
+  "version": "1.4.0",
+  "description": "Selbst gehostetes Datei-Sharing – verlustfrei, per Link teilen.",
+  "homepage": "https://github.com/FynnXland/foldwing",
+  "main": "./out/main/index.js",
+  "desktopName": "foldwing.desktop",
+  "author": "FynnXland",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "start": "electron-vite preview",
+    "build": "electron-vite build",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "test": "node scripts/test.mjs",
+    "make-icon": "node scripts/make-icon.mjs",
+    "media": "node docs/media/make_media.mjs",
+    "dist:win": "npm run make-icon && node scripts/fetch-cloudflared.mjs win && electron-vite build && electron-builder --win --publish never",
+    "dist:linux": "npm run make-icon && node scripts/fetch-cloudflared.mjs linux && electron-vite build && electron-builder --linux --publish never"
+  },
+  "build": {
+    "appId": "io.github.fynnxland.foldwing",
+    "productName": "Foldwing",
+    "copyright": "Copyright © 2026 FynnXland",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "FynnXland",
+        "repo": "foldwing"
+      }
+    ],
+    "files": [
+      "out/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "extraResources": [
+      {
+        "from": "build/icon.png",
+        "to": "icon.png"
+      },
+      {
+        "from": "resources/fonts",
+        "to": "fonts"
+      },
+      {
+        "from": "LICENSE",
+        "to": "LICENSE.txt"
+      },
+      {
+        "from": "THIRD-PARTY-NOTICES.md",
+        "to": "THIRD-PARTY-NOTICES.md"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "extraResources": [
+        {
+          "from": "resources/cloudflared.exe",
+          "to": "cloudflared.exe"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "category": "Utility",
+      "synopsis": "Selbst gehostetes Datei-Sharing – verlustfrei, per Link teilen.",
+      "maintainer": "FynnXland <FynnXland@users.noreply.github.com>",
+      "artifactName": "${productName}-${version}-linux.${ext}",
+      "extraResources": [
+        {
+          "from": "resources/cloudflared-linux-amd64",
+          "to": "cloudflared"
+        }
+      ]
+    },
+    "deb": {
+      "artifactName": "${productName}-${version}-linux-amd64.${ext}",
+      "recommends": [
+        "x11-utils"
+      ]
+    },
+    "nsis": {
+      "guid": "d8f708c0-17d5-5f89-b08a-caf10aa9723c",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Foldwing",
+      "artifactName": "${productName}-${version}-Setup.${ext}",
+      "include": "build/installer.nsh"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.${ext}",
+      "splashImage": "build/portable-splash.bmp"
+    }
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^6.2.1",
+    "electron": "^45.2.2",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "esbuild": "^0.28.2",
+    "png-to-ico": "^3.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2",
+    "vite": "^8.3.5"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.11",
+    "mammoth": "^1.12.0",
+    "xlsx": "^0.18.5"
+  }
+}

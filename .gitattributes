@@ -1,0 +1,27 @@
+# Zeilenenden: Im Repository liegt Text immer mit LF; beim Auschecken bekommt
+# jede Plattform ihre üblichen Zeilenenden.
+* text=auto
+
+# Shell-Skripte laufen unter Linux auch von einer mit Windows geteilten Platte
+# (scripts/build-linux.sh); mit CRLF bricht bash schon an "set -euo pipefail\r" ab.
+*.sh  text eol=lf
+
+# Windows-Skripte behalten CRLF, auch wenn sie unter Linux ausgecheckt werden.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binärdateien: nie Zeilenenden umschreiben, nie als Text vergleichen.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.mp4   binary
+*.exe   binary
+*.zip   binary
+*.pdf   binary
+*.ttf   binary
+*.woff  binary
+*.woff2 binary

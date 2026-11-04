@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>%APP_NAME%</title>
+    <style>
+      /*
+       * Ladeanzeige, bevor React da ist: reines HTML/CSS, kein Skript (CSP).
+       * %APP_NAME% ersetzt electron.vite.config.ts beim Bauen durch den Namen aus
+       * src/renderer/src/brand.ts.
+       * Bis main.tsx das Thema setzt (data-theme), bleibt die Seite durchsichtig:
+       * Man sieht die Fensterfarbe, die der Main-Prozess schon im richtigen Thema
+       * gesetzt hat. Die Farben der Anzeige passen auf Hell und Dunkel. React
+       * ersetzt den Inhalt von #root beim ersten Rendern und damit die Anzeige.
+       */
+      html:not([data-theme]),
+      html:not([data-theme]) body {
+        background: transparent;
+      }
+      .boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+      }
+      /* Das Thema steht hier noch nicht fest: ein Grau, das als großer Text auf
+         Hell (3,7:1) und Dunkel (4,9:1) lesbar ist. */
+      .boot__box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .boot__label {
+        font-family: system-ui, "Segoe UI", sans-serif;
+        font-size: 19px;
+        font-weight: 600;
+        color: #77818e;
+      }
+      /* Die eigene Titelleiste ist während des Ladens die Zieh-Fläche. */
+      .boot__drag {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 140px;
+        height: 44px;
+        -webkit-app-region: drag;
+      }
+      .boot__mark {
+        width: 56px;
+        height: 56px;
+        animation: boot-pulse 1.4s ease-in-out infinite;
+      }
+      @keyframes boot-pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(0.94);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot__mark {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="boot" role="status" aria-live="polite">
+        <div class="boot__drag"></div>
+        <div class="boot__box">
+          <svg
+            class="boot__mark"
+            viewBox="0 0 120 120"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <rect width="120" height="120" rx="26" fill="#2563eb" />
+            <path d="M106 18 L8 56 L42 70 L64 77 Z" fill="#ffffff" />
+            <path d="M106 18 L64 77 L58 110 Z" fill="#c3d6ff" />
+            <path d="M42 70 L64 77 L58 110 Z" fill="#1a3d9c" />
+          </svg>
+          <span class="boot__label">%APP_NAME% startet …</span>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+# Vorlage für den Foldwing-Relay. Kopieren nach wrangler.toml (wird von git
+# ignoriert), Werte eintragen, dann im Ordner worker/relay `npx wrangler deploy`.
+# Ausführlich: README.md in diesem Ordner.
+
+name = "foldwing-relay"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Erreichbar nur über die eigene Domain (Custom Domain, siehe unten), nicht über
+# <name>.<konto>.workers.dev und nicht über Vorschau-Adressen.
+workers_dev = false
+preview_urls = false
+
+# Custom Domain statt Route: Cloudflare legt DNS-Eintrag und Zertifikat selbst an,
+# und der Worker bekommt den ganzen Hostnamen. Die Domain muss als Zone in deinem
+# Konto liegen. (Eine Route `share.example.com/*` ginge auch, braucht aber einen
+# eigenen DNS-Eintrag und ist leichter falsch zu konfigurieren.)
+routes = [
+  { pattern = "share.example.com", custom_domain = true }
+]
+
+# Logs und Traces bleiben aus: Sonst landeten Pfade (also Links) und Metadaten der
+# Aufrufe bei Cloudflare im Dashboard.
+[observability]
+enabled = false
+
+[observability.logs]
+enabled = false
+
+[observability.traces]
+enabled = false
+
+# D1-Datenbank in der EU-Jurisdiktion anlegen:
+#   npx wrangler d1 create foldwing-relay --jurisdiction eu
+# Die ausgegebene database_id hier eintragen, danach das Schema einspielen:
+#   npx wrangler d1 execute foldwing-relay --remote --file schema.sql
+[[d1_databases]]
+binding = "DB"
+database_name = "foldwing-relay"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Täglich um 03:17 UTC: Geräte löschen, die sich 30 Tage nicht gemeldet haben.
+[triggers]
+crons = ["17 3 * * *"]
+
+# Ratenbegrenzung (optional – ohne diese Blöcke läuft der Worker ohne Limit).
+# namespace_id ist eine frei gewählte Zahl, eindeutig in deinem Konto.
+# Anmeldungen: je Gerät und je Netz (gehashte IP, nur als flüchtiger Zähler).
+[[ratelimits]]
+name = "REGISTER_LIMITER"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
+
+# Besucher: je Netz. Großzügig, weil ein Video beim Spulen viele Range-Anfragen stellt
+# (jede davon holt sich beim Relay eine Weiterleitung zum Tunnel).
+[[ratelimits]]
+name = "PROXY_LIMITER"
+namespace_id = "1002"
+simple = { limit = 600, period = 60 }
+
+# Volumenbremse je Gerät (alle Links eines Rechners) und je Link: Seitenaufrufe und
+# Datei-Weiterleitungen pro Minute. Schützt vor einem Link, der viral geht.
+[[ratelimits]]
+name = "DEVICE_LIMITER"
+namespace_id = "1003"
+simple = { limit = 1200, period = 60 }
+
+[[ratelimits]]
+name = "LINK_LIMITER"
+namespace_id = "1004"
+simple = { limit = 300, period = 60 }
+
+# Betreiber-Angaben für die Seiten /_/, /_/melden und die 451-Seite sowie die
+# Kurzwege /_/impressum, /_/datenschutz und /_/regeln. Stehen hier und nicht im
+# Code, und hier statt nur im Dashboard: Ein Deploy ersetzt die Variablen des
+# Workers durch die aus dieser Datei.
+[vars]
+CONTACT_EMAIL = "abuse@example.com"
+IMPRINT_URL = "https://example.com/impressum"
+PRIVACY_URL = "https://example.com/datenschutz"
+TERMS_URL = "https://example.com/nutzungsregeln"
+# Optional: Link auf den Quellcode (Info-Seite, Abschnitt „Die App“)
+SOURCE_URL = "https://github.com/FynnXland/foldwing"
+
+# Lokaler Test: npx wrangler dev --local (Port aus dem freien Bereich 8010–8019).
+[dev]
+port = 8012

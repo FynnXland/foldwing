@@ -1,0 +1,9 @@
+# Hält die Versionen der GitHub Actions aktuell. npm-Abhängigkeiten werden von Hand
+# aktualisiert: Danach THIRD-PARTY-NOTICES.md neu erzeugen
+# (node scripts/third-party-notices.mjs), sonst schlagen die Tests fehl.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

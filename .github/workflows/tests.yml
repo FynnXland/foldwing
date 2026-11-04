@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Ein neuer Push auf denselben Branch bricht den noch laufenden Durchgang ab.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+
+      # Typecheck, Tests und Build brauchen das Electron-Programm selbst nicht,
+      # nur das npm-Paket mit den Typen. Seit Electron 42 lädt npm ci das Programm
+      # ohnehin nicht mehr mit, erst der erste Start.
+      - name: Install dependencies
+        run: npm ci
+
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

@@ -1,0 +1,114 @@
+name: Bug report
+description: Something in Foldwing doesn't work as expected.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. You can write in English or German (*Deutsch ist genauso willkommen*).
+
+        **Issues are public and stay public.** Don't paste real file names, links to your shares, your device ID, your domain if it should stay private, tunnel tokens or your user name.
+        Security problems belong in a [private report](https://github.com/FynnXland/foldwing/security/advisories/new), not here.
+
+  - type: input
+    id: version
+    attributes:
+      label: Foldwing version
+      description: >-
+        Shown in the settings (gear icon) on the card *Über Foldwing*
+        (About Foldwing).
+      placeholder: "1.4.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install
+    attributes:
+      label: How do you run Foldwing?
+      options:
+        - Windows installer (Foldwing-<version>-Setup.exe)
+        - Windows portable (Foldwing-<version>-Portable.exe)
+        - Linux AppImage
+        - Linux .deb
+        - Own build (npm run dist:win or dist:linux)
+        - From source (npm run dev)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows 11
+        - Windows 10
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: How do recipients reach your links?
+      description: "Settings → card *Links* shows the mode."
+      options:
+        - Internet (share.fynn.land, the default)
+        - Only in my own network
+        - Own domain with my own Cloudflare Tunnel
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Drag three files into the window
+        2. Copy the link and open it on a phone in the same network
+        3. Tap "Alle als ZIP herunterladen"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: >-
+        What happened instead? Copy error messages exactly as shown, for example on the share
+        card or in the status line of the card *Links*; replace your domain, links and device ID
+        with placeholders.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: |
+        Foldwing doesn't write a log file, so a screenshot of the problem helps most. Drag it into this field.
+        **Only with sample data:** no real file names, links, domains, tunnel tokens or your user name; crop or blur them.
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: >-
+            I removed or blurred real file names, links to my shares, my device ID, tunnel tokens,
+            my user name and any other personal data from this report and its screenshots.
+          required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Antivirus or firewall software, file types and sizes involved, when it started happening …
