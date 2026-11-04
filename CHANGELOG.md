@@ -12,6 +12,11 @@ Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die V
 
 - Neue Links sehen so aus: `https://foldwing.online/…` statt `https://share.fynn.land/…`. Dahinter steckt derselbe Relay, deshalb bleiben ältere Links gültig, und Foldwing 1.4.0 teilt bis zum Update weiter wie bisher.
 
+### Behoben
+
+- „Wirklich löschen?“ bleibt rot, wenn du mit der Maus darüberfährst. Bisher wurde die Schrift dabei fast unsichtbar.
+- Während Foldwing verbindet, steht das nur noch einmal da und nicht zusätzlich in einer Leiste darüber.
+
 ## [1.4.0] - 2026-11-04
 
 **Foldwing ist Open Source, und deine Links gehen jetzt überall, ohne Konto und ohne Einrichtung.** Die Dateien bleiben dabei auf deinem PC.

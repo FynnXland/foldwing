@@ -39,7 +39,9 @@ export function TunnelBanner({ status, onOpenSettings, onShowNotice, noticeHidde
 
   const problem = status.state === 'offline' || status.state === 'error' || status.state === 'blocked'
 
-  if (status.state === 'resting') return null
+  // Ruhe und Verbinden zeigt schon die Statuszeile über der Ablage (Punkt + „verbindet …“);
+  // eine zweite Leiste mit demselben Punkt wäre doppelt.
+  if (status.state === 'resting' || status.state === 'connecting') return null
   // Den wartenden Zustand erklärt der Dialog; nur wenn er weggeklickt ist, hier erinnern.
   if (status.state === 'waiting') {
     if (!noticeHidden) return null
@@ -77,17 +79,15 @@ export function TunnelBanner({ status, onOpenSettings, onShowNotice, noticeHidde
 
   return (
     <div className={`banner ${problem ? 'banner--problem' : 'banner--info'}`} role={problem ? 'alert' : 'status'}>
-      <span className={`dot ${problem ? 'dot--problem' : status.state === 'online' ? 'dot--ok' : 'dot--busy'}`} aria-hidden />
+      <span className={`dot ${problem ? 'dot--problem' : 'dot--ok'}`} aria-hidden />
       <span className="banner__text">
         {problem ? (
           status.text
-        ) : status.state === 'online' ? (
+        ) : (
           <>
             Deine Links funktionieren, solange {APP_NAME} läuft. Beendest du die App, sind sie nicht
             mehr erreichbar.
           </>
-        ) : (
-          <>Verbinde. Gleich sind deine Links erreichbar.</>
         )}
       </span>
       {problem && (

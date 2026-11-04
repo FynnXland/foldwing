@@ -92,6 +92,7 @@
   --warning-bg: #fdf2e0;
   --danger-fg: #b93a35;
   --danger-bg: #fceceb;
+  --danger-hover: #9b2f2b;
 
   /* Kachelfarben je Dateiart */
   --kind-image: #2563eb;
@@ -139,6 +140,7 @@
   --warning-bg: rgba(217, 138, 26, 0.16);
   --danger-fg: #f0616d;
   --danger-bg: rgba(220, 75, 70, 0.16);
+  --danger-hover: #f58792;
 
   --kind-image: #7da0ff;
   --kind-video: #b39dff;
@@ -366,6 +368,9 @@ body {
   border-color: transparent;
   color: #fff;
   font-weight: 600;
+}
+.btn--danger:hover:not(:disabled) {
+  background: var(--danger-hover);
 }
 :root[data-theme='dark'] .btn--danger {
   color: var(--gray-950);
