@@ -15,6 +15,7 @@
 
 <p align="center">
   <a href="https://github.com/FynnXland/foldwing/releases/latest"><b>Download</b></a> &nbsp;·&nbsp;
+  <a href="https://fynn.land/foldwing/">Website</a> &nbsp;·&nbsp;
   <a href="#download">Alle Dateien</a> &nbsp;·&nbsp; <a href="README.md">English</a> &nbsp;·&nbsp; <a href="docs/">Dokumentation</a>
 </p>
 
