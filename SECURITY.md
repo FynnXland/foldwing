@@ -5,7 +5,7 @@
 Only the [latest release](https://github.com/FynnXland/foldwing/releases/latest) gets
 security fixes. The Windows installer and the AppImage update themselves; the portable app and
 the .deb show a note when a new version is out. If you build from source, use the current
-`main` branch. Foldwing 1.4.0 is built on Electron 45.
+`main` branch. Foldwing 1.4.2 is built on Electron 45.
 
 ## Reporting a vulnerability
 

@@ -1,6 +1,6 @@
 # Your own domain with Cloudflare Tunnel
 
-Status: Foldwing 1.4.1. [Deutsche Fassung](cloudflare-tunnel.de.md)
+Status: Foldwing 1.4.2. [Deutsche Fassung](cloudflare-tunnel.de.md)
 
 By default, Foldwing's links run through the public relay `foldwing.online` and work anywhere
 without any setup. This guide is for the third mode, *Eigene Domain* (Own domain): links use

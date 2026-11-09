@@ -1,6 +1,6 @@
 # README media
 
-Status: Foldwing 1.4.0.
+Status: Foldwing 1.4.2.
 
 The GIF and the screenshots used in the project README. All of them come from
 `make_media.mjs` in this folder. The script runs Foldwing's real interface and its real
