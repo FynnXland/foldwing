@@ -299,9 +299,15 @@ node worker/scripts/moderate.mjs <befehl> …   # Moderation (block/unblock/look
   `.blockmap`-Dateien müssen am Release hängen, sonst finden installierte Apps keine Updates.
   `appId` und `nsis.guid` nie ändern, sonst installiert ein Update doppelt.
 - **`asar list`** gibt unter Windows **Backslash**-Pfade aus – beim Grep beachten.
-- **`xlsx`, `mammoth` und `electron-updater`** sind CommonJS → unter ESM liegt die API auf
-  `default` (`import XLSX from 'xlsx'` bzw. `(await import('xlsx')).default`), nicht
-  `import * as`.
+- **`mammoth` und `electron-updater`** sind CommonJS → unter ESM liegt die API auf
+  `default` (`import X from 'mammoth'` bzw. `(await import('mammoth')).default`), nicht
+  `import * as`. **`xlsx`** (0.20.x) liefert unter `import()` seine ESM-Fassung, die API liegt
+  ebenfalls auf `default`; `XLSX.readFile`/`writeFile` gehen dort nicht ohne `set_fs`: Datei selbst
+  lesen und `XLSX.read(puffer, { type: 'buffer' })` nutzen.
+- **`xlsx` kommt vom SheetJS-CDN**, nicht von npm (dort steht nur 0.18.5 mit zwei offenen
+  Sicherheitslücken): `package.json` hat die Tarball-Adresse, `package-lock.json` die Prüfsumme.
+  Dependabot meldet dafür nichts; neue Fassung = Adresse ändern, `npm install`, Tests,
+  `node scripts/third-party-notices.mjs`.
 - **electron-builder `files`** muss `node_modules/**/*` enthalten, sonst fehlen
   Produktions-Deps im asar (Vorschau schweigt dann in der EXE).
 - **Preload wird als `index.mjs` gebaut** – im Main so referenzieren.

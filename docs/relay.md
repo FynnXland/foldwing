@@ -1,6 +1,6 @@
 # The relay
 
-Status: Foldwing 1.4.2. For people who want to know what happens to their links in the
+Status: Foldwing 1.4.3. For people who want to know what happens to their links in the
 default mode, and for anyone who runs a relay of their own. The worker's own setup guide (in
 German) is [worker/relay/README.md](../worker/relay/README.md); the source code is the final
 authority.

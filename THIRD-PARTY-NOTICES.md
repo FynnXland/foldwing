@@ -41,20 +41,15 @@ electron-builder packs every production dependency from `package-lock.json` into
 | Package | Version | License | Source |
 |---|---|---|---|
 | @xmldom/xmldom | 0.8.15 | MIT | https://github.com/xmldom/xmldom |
-| adler-32 | 1.3.1 | Apache-2.0 | https://github.com/SheetJS/js-adler32 |
 | argparse | 1.0.10 | MIT | https://github.com/nodeca/argparse |
 | argparse | 2.0.1 | Python-2.0 | https://github.com/nodeca/argparse |
 | base64-js | 1.5.1 | MIT | https://github.com/beatgammit/base64-js |
 | builder-util-runtime | 9.7.0 | MIT | https://github.com/electron-userland/electron-builder |
-| cfb | 1.2.2 | Apache-2.0 | https://github.com/SheetJS/js-cfb |
-| codepage | 1.15.0 | Apache-2.0 | https://github.com/SheetJS/js-codepage |
 | core-util-is | 1.0.2 | MIT | https://github.com/isaacs/core-util-is |
-| crc-32 | 1.2.2 | Apache-2.0 | https://github.com/SheetJS/js-crc32 |
 | debug | 4.4.3 | MIT | https://github.com/debug-js/debug |
 | dingbat-to-unicode | 1.0.1 | BSD-2-Clause | https://github.com/mwilliamson/dingbat-to-unicode |
 | duck | 0.1.12 | BSD-2-Clause | https://github.com/mwilliamson/duck.js |
 | electron-updater | 6.8.11 | MIT | https://github.com/electron-userland/electron-builder |
-| frac | 1.1.2 | Apache-2.0 | https://github.com/SheetJS/frac |
 | fs-extra | 10.1.0 | MIT | https://github.com/jprichardson/node-fs-extra |
 | graceful-fs | 4.2.11 | ISC | https://github.com/isaacs/node-graceful-fs |
 | immediate | 3.0.6 | MIT | https://github.com/calvinmetcalf/immediate |
@@ -79,15 +74,12 @@ electron-builder packs every production dependency from `package-lock.json` into
 | semver | 7.7.4 | ISC | https://github.com/npm/node-semver |
 | setimmediate | 1.0.5 | MIT | https://github.com/YuzuJS/setImmediate |
 | sprintf-js | 1.0.3 | BSD-3-Clause | https://github.com/alexei/sprintf.js |
-| ssf | 0.11.2 | Apache-2.0 | https://github.com/SheetJS/ssf |
 | string_decoder | 1.1.1 | MIT | https://github.com/nodejs/string_decoder |
 | tiny-typed-emitter | 2.1.0 | MIT | https://github.com/binier/tiny-typed-emitter |
 | underscore | 1.13.8 | MIT | https://github.com/jashkenas/underscore |
 | universalify | 2.0.1 | MIT | https://github.com/RyanZim/universalify |
 | util-deprecate | 1.0.2 | MIT | https://github.com/TooTallNate/util-deprecate |
-| wmf | 1.0.2 | Apache-2.0 | https://github.com/SheetJS/js-wmf |
-| word | 0.3.0 | Apache-2.0 | https://github.com/SheetJS/js-word |
-| xlsx | 0.18.5 | Apache-2.0 | https://github.com/SheetJS/sheetjs |
+| xlsx | 0.20.3 | Apache-2.0 | https://git.sheetjs.com/SheetJS/sheetjs |
 | xmlbuilder | 10.1.1 | MIT | https://github.com/oozcitak/xmlbuilder-js |
 
 ## License compatibility
@@ -98,9 +90,9 @@ of these permissive licenses:
 | License | Packages |
 |---|---|
 | MIT | 31 |
-| Apache-2.0 | 9 |
 | BSD-2-Clause | 5 |
 | ISC | 3 |
+| Apache-2.0 | 1 |
 | BSD-3-Clause | 1 |
 | BlueOak-1.0.0 | 1 |
 | MIT AND Zlib | 1 |

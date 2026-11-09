@@ -1,6 +1,6 @@
 # Foldwing architecture
 
-Status: Foldwing 1.4.2. This page is for contributors: how a file travels from the window to
+Status: Foldwing 1.4.3. This page is for contributors: how a file travels from the window to
 a recipient's browser, which module does what, and why the server is not always running. The
 source code is the final authority. Code comments are in German.
 

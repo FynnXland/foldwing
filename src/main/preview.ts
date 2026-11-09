@@ -6,8 +6,9 @@ import { listZipEntries, ZipEntry } from './zip'
  * xlsx (~18–25 MB) und mammoth (~9–13 MB im Hauptprozess, je nach Messung) braucht
  * nur die Excel- bzw. Word-Vorschau – sie werden deshalb erst beim ersten Gebrauch
  * geladen (einmalig ~0,1–0,2 s) statt beim Start, und bleiben danach im Modul-Cache.
- * Beide sind CommonJS: Unter ESM liegt die API auf `default` (CLAUDE.md §6);
- * `?? mod` deckt eine Umgebung ohne ab.
+ * mammoth ist CommonJS, xlsx liefert unter `import()` seine ESM-Fassung (`xlsx.mjs`); bei beiden
+ * liegt die API auf `default` (CLAUDE.md §6), `?? mod` deckt eine Umgebung ohne ab. Die ESM-Fassung
+ * von xlsx kennt kein `readFile` ohne `set_fs`: Dateien werden deshalb selbst gelesen und als Puffer übergeben.
  */
 type XlsxApi = typeof import('xlsx')
 type MammothApi = typeof import('mammoth')
@@ -16,6 +17,11 @@ let mammothLoading: Promise<MammothApi> | null = null
 
 function cjsApi<T>(mod: T): T {
   return (mod as { default?: T }).default ?? mod
+}
+
+/** Nur für Tests: wurde xlsx schon angefordert? (Die ESM-Fassung landet nicht im require-Cache.) */
+export function isXlsxRequested(): boolean {
+  return xlsxLoading !== null
 }
 
 function loadXlsx(): Promise<XlsxApi> {
@@ -347,7 +353,7 @@ async function sheetPreview(binPath: string, isCsv: boolean): Promise<string> {
   const XLSX = await loadXlsx()
   const wb = isCsv
     ? XLSX.read(decodeCsv(await fsp.readFile(binPath)), { type: 'string' })
-    : XLSX.readFile(binPath)
+    : XLSX.read(await fsp.readFile(binPath), { type: 'buffer' })
   const names = wb.SheetNames.slice(0, 5)
   let html = ''
   for (const name of names) {
