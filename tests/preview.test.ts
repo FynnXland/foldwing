@@ -11,7 +11,7 @@ import {
 import { tmpdir } from 'node:os'
 import { join, sep } from 'node:path'
 import { createRequire } from 'node:module'
-import { buildPreview, sanitizePreviewHtml, TABLE_TAGS, DOC_TAGS } from '../src/main/preview'
+import { buildPreview, isXlsxRequested, sanitizePreviewHtml, TABLE_TAGS, DOC_TAGS } from '../src/main/preview'
 import { crc32 } from '../src/main/zip-write'
 import type { ShareMeta } from '../src/main/store'
 
@@ -22,8 +22,9 @@ function makeTmpDir(): string {
   return mkdtempSync(join(tmpdir(), 'foldwing-preview-test-'))
 }
 
-/** Ist das (CommonJS-)Paket schon geladen? CJS landet auch per import() im require-Cache. */
+/** Ist das Paket schon geladen? CJS landet auch per import() im require-Cache; xlsx (ESM-Fassung) meldet preview.ts selbst. */
 function isLoaded(pkg: string): boolean {
+  if (pkg === 'xlsx') return isXlsxRequested()
   const cache = createRequire(import.meta.url).cache
   return Object.keys(cache).some((k) => k.includes(`${sep}node_modules${sep}${pkg}${sep}`))
 }
@@ -176,14 +177,14 @@ test('sanitizePreviewHtml: Groß-/Kleinschreibung und unquotierte Attribute norm
 test('buildPreview: .xlsx mit Payload-Zelle – kein <meta>, Inhalt bleibt sichtbar', async () => {
   const dir = makeTmpDir()
   try {
-    // Dynamisch (siehe Kopf der Datei); CommonJS -> API auf `default`.
+    // Dynamisch (siehe Kopf der Datei); die API liegt auf `default`.
     const mod = await import('xlsx')
     const XLSX = mod.default ?? mod
     const wb = XLSX.utils.book_new()
     const ws = XLSX.utils.aoa_to_sheet([[ATTR_BREAKOUT_PAYLOAD]])
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
     const filePath = join(dir, 'payload.xlsx')
-    XLSX.writeFile(wb, filePath)
+    writeFileSync(filePath, XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' }))
 
     const html = await buildPreview(meta({ name: 'payload.xlsx' }), filePath, '/f/test01')
 

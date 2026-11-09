@@ -1,6 +1,6 @@
 {
   "name": "foldwing",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Selbst gehostetes Datei-Sharing – verlustfrei, per Link teilen.",
   "homepage": "https://github.com/FynnXland/foldwing",
   "main": "./out/main/index.js",
@@ -151,6 +151,6 @@
   "dependencies": {
     "electron-updater": "^6.8.11",
     "mammoth": "^1.12.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }

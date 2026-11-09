@@ -412,6 +412,9 @@ function sourceUrl(pkg, name) {
     if (short) return `https://github.com/${short[1]}/${short[2].replace(/\.git$/, '')}`
     const github = repo.match(/github\.com[/:]([\w.-]+)\/([\w.-]+?)(?:\.git)?\/?$/)
     if (github) return `https://github.com/${github[1]}/${github[2]}`
+    // Andere Hoster (z. B. git.sheetjs.com): https-Adresse ohne `git+` und `.git`
+    const other = repo.match(/^(?:git\+)?(https:\/\/[^\s]+?)(?:\.git)?\/?$/)
+    if (other) return other[1]
   }
   return `https://www.npmjs.com/package/${name}`
 }

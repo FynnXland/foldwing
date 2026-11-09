@@ -4,6 +4,14 @@ Was sich für Nutzer von Foldwing (bis 1.3.0 FlowShare) geändert hat, neueste z
 
 Das Format folgt [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), die Versionsnummern folgen [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.4.3] - 2026-11-09
+
+**Die Excel-Vorschau liest Tabellen jetzt mit einer aktuellen Fassung der Bibliothek SheetJS.**
+
+### Sicherheit
+
+- SheetJS ist von 0.18.5 auf 0.20.3 aktualisiert. Damit sind zwei bekannte Schwachstellen beim Einlesen präparierter Tabellen behoben (Prototype Pollution und ReDoS). Wie die Vorschau aussieht und was sie zeigt, ändert sich nicht.
+
 ## [1.4.2] - 2026-11-04
 
 **Jetzt haben alle dieselbe Fassung mit den Korrekturen aus 1.4.1.**
